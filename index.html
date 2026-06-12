@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>교사 직업 소개</title>
+  <title>대기전력 계산기</title>
 
   <style>
     body {
@@ -19,16 +19,6 @@
       padding: 40px 20px;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 36px;
-    }
-
-    header p {
-      font-size: 18px;
-      margin-top: 10px;
-    }
-
     nav {
       background-color: white;
       display: flex;
@@ -36,8 +26,6 @@
       gap: 10px;
       padding: 15px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      position: sticky;
-      top: 0;
     }
 
     nav button {
@@ -46,12 +34,6 @@
       padding: 12px 20px;
       border-radius: 20px;
       cursor: pointer;
-      font-size: 15px;
-    }
-
-    nav button:hover {
-      background-color: #4a90e2;
-      color: white;
     }
 
     nav button.active {
@@ -73,173 +55,109 @@
       display: block;
     }
 
-    h2 {
-      color: #4a90e2;
-      border-bottom: 2px solid #4a90e2;
-      padding-bottom: 10px;
+    input {
+      padding: 10px;
+      width: 200px;
+      margin: 10px 0;
+      font-size: 16px;
     }
 
-    p {
-      line-height: 1.8;
-      font-size: 17px;
-    }
-
-    ul {
-      line-height: 2;
-      font-size: 17px;
-    }
-
-    .image-box {
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    .image-box img {
-      width: 80%;
-      max-width: 500px;
-      border-radius: 15px;
-    }
-
-    .card-container {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
-
-    .card {
-      flex: 1;
-      min-width: 220px;
-      background-color: #f0f6ff;
-      padding: 20px;
-      border-radius: 12px;
-      text-align: center;
-    }
-
-    .card h3 {
-      color: #2f6fb3;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #333;
+    button.calc {
+      padding: 10px 20px;
+      background-color: #4a90e2;
       color: white;
-      margin-top: 40px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      background: #f0f6ff;
+      padding: 15px;
+      border-radius: 10px;
     }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <h1>교사 직업 소개</h1>
-    <p>학생들의 꿈과 성장을 함께 만들어가는 직업</p>
-  </header>
+<header>
+  <h1>대기전력 계산기</h1>
+  <p>전자제품의 대기전력으로 전기요금을 계산해보세요</p>
+</header>
 
-  <nav>
-    <button class="tab-button active" onclick="showTab('intro')">직업 소개</button>
-    <button class="tab-button" onclick="showTab('work')">하는 일</button>
-    <button class="tab-button" onclick="showTab('ability')">필요한 능력</button>
-    <button class="tab-button" onclick="showTab('path')">되는 방법</button>
-    <button class="tab-button" onclick="showTab('future')">전망과 가치</button>
-  </nav>
+<nav>
+  <button class="tab-button active" onclick="showTab('calc')">계산기</button>
+  <button class="tab-button" onclick="showTab('info')">설명</button>
+</nav>
 
-  <section id="intro" class="active">
-    <h2>교사란?</h2>
-    <p>
-      교사는 학생들에게 지식을 가르치고, 올바른 인성과 태도를 기를 수 있도록 돕는 직업입니다.
-      단순히 교과 내용을 전달하는 사람을 넘어 학생들이 자신의 꿈을 찾고 성장할 수 있도록 이끌어 주는 중요한 역할을 합니다.
-    </p>
+<!-- 계산기 -->
+<section id="calc" class="active">
+  <h2>대기전력 입력</h2>
 
-    <div class="image-box">
-      <img src="teacher.jpg" alt="교사 이미지">
-    </div>
-  </section>
+  <p>대기전력 (W)를 입력하세요</p>
+  <input type="number" id="power" placeholder="예: 5">
 
-  <section id="work">
-    <h2>교사가 하는 일</h2>
-    <ul>
-      <li>학생들에게 교과 내용을 가르칩니다.</li>
-      <li>학생들의 생활 습관과 인성을 지도합니다.</li>
-      <li>시험, 수행평가, 과제 등을 통해 학습 상태를 평가합니다.</li>
-      <li>진로 상담을 통해 학생들이 미래를 준비하도록 돕습니다.</li>
-      <li>학급 운영, 학교 행사, 동아리 활동 등을 지도합니다.</li>
-    </ul>
-  </section>
+  <p>전기요금 (1kWh당 원)</p>
+  <input type="number" id="price" placeholder="예: 120">
 
-  <section id="ability">
-    <h2>교사에게 필요한 능력</h2>
+  <br>
+  <button class="calc" onclick="calculate()">계산하기</button>
 
-    <div class="card-container">
-      <div class="card">
-        <h3>의사소통 능력</h3>
-        <p>학생들과 잘 대화하고 이해하는 능력이 필요합니다.</p>
-      </div>
+  <div class="result" id="result"></div>
+</section>
 
-      <div class="card">
-        <h3>전문 지식</h3>
-        <p>가르치는 과목에 대한 깊은 이해가 필요합니다.</p>
-      </div>
+<!-- 설명 -->
+<section id="info">
+  <h2>대기전력이란?</h2>
+  <p>
+    대기전력은 전자제품을 사용하지 않아도 전원이 연결되어 있을 때 소비되는 전력입니다.
+  </p>
+  <ul>
+    <li>TV, 컴퓨터, 충전기 등에서 발생</li>
+    <li>24시간 계속 소비됨</li>
+    <li>전기요금 증가의 원인</li>
+  </ul>
+</section>
 
-      <div class="card">
-        <h3>책임감</h3>
-        <p>학생들의 성장에 책임감을 가지고 지도해야 합니다.</p>
-      </div>
+<script>
+function showTab(tabId) {
+  const sections = document.querySelectorAll("section");
+  const buttons = document.querySelectorAll(".tab-button");
 
-      <div class="card">
-        <h3>공감 능력</h3>
-        <p>학생들의 고민과 감정을 이해하는 태도가 중요합니다.</p>
-      </div>
-    </div>
-  </section>
+  sections.forEach(section => section.classList.remove("active"));
+  buttons.forEach(button => button.classList.remove("active"));
 
-  <section id="path">
-    <h2>교사가 되는 방법</h2>
-    <p>
-      교사가 되기 위해서는 보통 사범대학이나 교육대학에 진학하거나,
-      일반 대학에서 교직 과정을 이수해야 합니다.
-      이후 교원 자격증을 취득하고 임용시험에 합격하면 국공립학교 교사가 될 수 있습니다.
-    </p>
+  document.getElementById(tabId).classList.add("active");
+  event.target.classList.add("active");
+}
 
-    <ul>
-      <li>초등교사: 교육대학교 진학</li>
-      <li>중등교사: 사범대학 또는 교직 이수</li>
-      <li>교원 자격증 취득</li>
-      <li>교원 임용시험 준비 및 합격</li>
-    </ul>
-  </section>
+function calculate() {
+  const power = document.getElementById("power").value;
+  const price = document.getElementById("price").value;
 
-  <section id="future">
-    <h2>교사의 전망과 가치</h2>
-    <p>
-      인공지능과 디지털 기술이 발전해도 학생을 이해하고 정서적으로 지지하는 교사의 역할은 여전히 중요합니다.
-      앞으로의 교사는 지식을 전달하는 사람뿐만 아니라 학생의 진로를 함께 고민하고,
-      창의력과 문제 해결력을 키워 주는 조력자의 역할을 하게 될 것입니다.
-    </p>
-  </section>
+  if (!power || !price) {
+    alert("값을 입력하세요!");
+    return;
+  }
 
-  <footer>
-    <p>© 2026 나의 진로 소개 웹사이트</p>
-  </footer>
+  // 하루 전력 사용량 (kWh)
+  const dailyEnergy = (power * 24) / 1000;
 
-  <script>
-    function showTab(tabId) {
-      const sections = document.querySelectorAll("section");
-      const buttons = document.querySelectorAll(".tab-button");
+  // 하루 요금
+  const dailyCost = dailyEnergy * price;
 
-      sections.forEach(section => {
-        section.classList.remove("active");
-      });
+  // 한달 (30일)
+  const monthlyCost = dailyCost * 30;
 
-      buttons.forEach(button => {
-        button.classList.remove("active");
-      });
-
-      document.getElementById(tabId).classList.add("active");
-      event.target.classList.add("active");
-    }
-  </script>
+  document.getElementById("result").innerHTML =
+    "하루 전력 사용량: " + dailyEnergy.toFixed(3) + " kWh<br>" +
+    "하루 전기요금: " + dailyCost.toFixed(1) + " 원<br>" +
+    "한달 전기요금: " + monthlyCost.toFixed(0) + " 원";
+}
+</script>
 
 </body>
 </html>
